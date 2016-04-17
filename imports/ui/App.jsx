@@ -25,12 +25,7 @@ class App extends Component {
     // Find the text field vie the React ref
     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim() // 'trim()' to get rid of unnecessary whitespace
 
-    Tasks.insert({
-      text, // short form of 'text: text'
-      createdAt: new Date(),
-      owner: Meteor.userId(),           // _id of logged in user
-      username: Meteor.user().username  // username of logged in user
-    })
+    Meteor.call('tasks.insert', text)
 
     // Clear form by setting the input to an empty string
     ReactDOM.findDOMNode(this.refs.textInput).value = ''
